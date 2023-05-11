@@ -1,0 +1,27 @@
+{
+  "name": "week6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnneElizabeth/week6FinalProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnneElizabeth/week6FinalProject/issues"
+  },
+  "homepage": "https://github.com/AnneElizabeth/week6FinalProject#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
