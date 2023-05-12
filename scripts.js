@@ -74,4 +74,35 @@ class CardDeck {
     }
 }
 
+// Create class for running the card game
+class War {
+    // Create array to store each player object
+    constructor() {
+        this.players = []
+    }
+
+    // Method for creating each player
+    createPlayer(player) {
+        let player1 = prompt(`Enter the name of the first player: ${player1}`)
+    }
+
+    // Method for starting the card game
+    start() {
+        // Create each player
+
+        // Shuffle card deck
+
+        // Deal cards
+
+        // Iterate through each player's card pile and tally points
+
+        // Determine winner
+
+        // Reload and play again
+    }
+}
+
+let war  = new War()
+war()
+
 
