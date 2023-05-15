@@ -8,14 +8,14 @@
  */
 
  // Card players created from CardPlayer class
- // Each card player object needs a name, a pile of 26 cards to play, and a total points tally
+ // Each card player object needs a name, a pile of 26 cards to play, and a score
  // Card pile is an array of 26 cards
  // Total points tally starts at 0
  class CardPlayer {
     constructor (playerName) {
         this.playerName = playerName
         this.cardPile = []
-        this.pointsTally = 0
+        this.score = 0
     }
  }
 
@@ -27,35 +27,52 @@ class Card {
         this.cardFace = cardFace
         this.cardValue = cardValue
     }
-}
+}r
 
  // Card deck(s) created from CardDeck class
- // Each instance of a card deck needs an array of 52 card objects, each with an assigned suit and face, each with a point value
+ 
 class CardDeck {
+ 
+    // Each instance of a card deck needs an array of 52 card objects, each with an assigned suit and face, each with a point value
     constructor() {
         this.cardDeck = []
+    }
+
+    // JS getter method for accessing property values of card objects
+    get getCards() {
+        return this.cardDeck
+    }
+
+     // Create 52 card objects for a deck
+     // Arrays of card properties will be merged together into one array, declared with const because elements won't change
     
-     // Create arrays of card properties: suits, card faces, card values; use const because elements won't change
-        const cardSuits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+     makeCards () {  
+        const cardSuits = ['\u2665', '\u2666', '\u2663', '\u2660']
         const cardFaces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
-        //const cardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    
-        // Iterate through card property arrays and create cards with one of each property
+        const cardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        
+        // Iterate through card property arrays and create cards 
         for (let i = 0; i < cardSuits.length; i++) {
             for (let j = 0; j < cardFaces.length; j++) {
-                this.cardDeck.push(new Card(cardFaces[j], j +2 , cardSuits[i]))
+                this.cardDeck.push(new Card(cardFaces[j], cardSuits[i], cardValues[j]))
             }
         }
     }
 
-    // Class method for shuffling the card deck after each game
-    shuffleCardDeck(cardDeck) {
-        for (let i = this.cardDeck.length - 1; i > 0; i--) {
-            let randomCardIndex = Math.floor(Math.random() * (i + 1))
-            let currentCardIndex = this.cardDeck[i]
-            this.cardDeck[i] = this.cardDeck[randomCardIndex]
-            this.cardDeck[randomCardIndex] = currentCardIndex
+    // Class method for shuffling deck after each game
+    //https://flaviocopes.com/how-to-shuffle-array-javascript/
+
+    shuffleCardDeck () {
+        if (this.cardDeck.length >0) {
+            const shuffledDeck = this.cardDeck.sort(() => Math.random() - 0.5)
+            this.cardDeck = [...shuffledDeck]
         }
+    }
+
+    // After cards are created, need to create a deck object and shuffle it
+    makeDeck() {
+        this.makeCards()
+        this.shuffleDeck()
         return this.cardDeck
     }
 
@@ -66,8 +83,9 @@ class CardDeck {
     }
 }
 
+
 // Create class for running the card game
-class Game {
+class WarGame {
     // Create array to store each player object
     constructor() {
         this.players = []
@@ -144,7 +162,7 @@ class Game {
     // Convert beginButton to replayButton
 }
 
-//let war  = new War()
-//war()
+let warGame  = new WarGame()
+warGame
 
 
