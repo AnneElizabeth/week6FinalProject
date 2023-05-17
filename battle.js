@@ -115,22 +115,17 @@ class Deck {
 
 // Create class for running the card game
 class Battle {
-    // Create array to store each player object
-    constructor() {
-        this.players = []
-    }
-
      // Variables used for displaying the cards
-    
-    
-    // Method that begins the game
-    
-    startGame() {
         let playerTwoCardPile = document.querySelector('.p2-card-pile')
         let playerOneCardPile = document.querySelector('.p1-card-pile')
         let playerTwoDeckElement = document.querySelector('.p2-deck')
         let playerOneDeckElement = document.querySelector('.p1-deck')
         let result = document.querySelector('.result')
+    
+    // Method that begins the game
+    
+    startGame() {
+        
   
         let playerOneDeck, playerTwoDeck, gameStarted
         

@@ -50,4 +50,72 @@ class Deck {
 /* let practiceDeck = new Deck()
 console.log(practiceDeck.makeDeck()) */
 
+// Class used for creating player objects; each player needs a name a pile of 26 cards
+class Player {
+    constructor() {
+        this.cardPile = []
+    }
+}
+
+// Class for creating each game
+class Battle {
+    constructor () {
+        this.deck = new Deck()
+        this.player1 = new Player(player1)
+        this.player2 = new Player(player2)
+        this.p1Pile = []
+        this.p2Pile = []
+    }
+
+    dealCards() {
+        let p1Pile, p2Pile
+        
+        p1Pile = new Deck(deck.cardDeck.slice(0,26))
+        p2Pile = new Deck(deck.cardDeck.slice(26,52))
+    }
+
+    /* showCardPiles() {
+        display card piles
+    } */
+    
+    playBattle() {
+        let p1Card, p2Card, p1Score, p2Score
+        p1Score = []
+        p2Score = []
+        
+       while (p1Pile > 0 && p2Pile > 0) {
+            p1Card = this.p1Pile.shift()
+            p2Card = this.p2Pile.shift()
+
+            if (p1Card > p2Card) {
+                p1Score.push(1)
+                console.log('Player 1 wins the battle!')
+            } else if (p1Card < p2Card) {
+                p2Score.push(1)
+                console.log('Player 2 wins the battle!')
+            } else {
+                console.log('Tie! No points awarded.')
+            }
+        }
+    }
+
+    declareWinner () {
+        let p1TotalPoints = p1Pile.reduce((x, y) => x + y, 0)
+        let p2TotalPoints = p2Pile.reduce((x, y) => x + y, 0)
+
+        if (p1TotalPoints > p2TotalPoints) {
+            console.log('Player 1 wins the war!')
+        } else if (p1TotalPoints < p2TotalPoints) {
+            console.log('Player 2 wins the war!')
+        } else {
+            console.log('Tie! Neither player wins')
+        }
+    }
+}
+
+let battle = new Battle()
+battle.playBattle()
+
+
+
 
