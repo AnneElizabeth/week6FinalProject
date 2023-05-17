@@ -70,35 +70,32 @@ class Player {
 // Class for creating each game
 class Battle {
     constructor (player1, player2) {
-        this.deck = new Deck()
-        this.player1 = new Player(player1, player1.cardPile, player1.score)
-        this.player2 = new Player(player2, player2.cardPile, player2.score)
+        this.player1 = new Player(player1)
+        this.player2 = new Player(player2)
         this.dealCards()
     }
  
     dealCards() {
-        this.player1.cardPile = new Deck(cardDeck.slice(0,26))
+        let deck = new Deck()
+        this.player1.cardPile = new Deck(deck.cardDeck.slice(0,26))
         let p1Pile = this.player1.cardPile
-        this.player2.cardPile = new Deck(cardDeck.slice(26,52))
+        this.player2.cardPile = new Deck(deck.cardDeck.slice(26,52))
         let p2Pile = this.player2.cardPile
 
         console.log(p1Pile)
         console.log(p2Pile)
     }
 
-    showCardPiles() {
-        let p1Deck = document.querySelector('.p1-deck')
-        let p2Deck = document.querySelector('.p2-deck')
-        
-
-        p1Deck.appendChild(p1Card.getHTML())
-        p2Deck.appendChild(p2Card.getHTML())
-
-    } 
-
     playBattle() {   
         let p1Card = p1Pile.flipCard()
         let p2Card = p2Pile.flipCard()
+        
+        let p1Deck = document.querySelector('.p1-deck')
+        let p2Deck = document.querySelector('.p2-deck')
+        
+        p1Deck.appendChild(p1Card.getHTML())
+        p2Deck.appendChild(p2Card.getHTML())
+
         let result = document.querySelector('.result')
         
         while (p1Pile > 0 && p2Pile > 0) {
@@ -132,8 +129,8 @@ class Battle {
      }  
 }
 
-//let battle = new Battle()
-//battle.playBattle()
+let battle = new Battle()
+battle.playBattle()
 
 
 
