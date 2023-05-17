@@ -4,16 +4,24 @@ class Card {
         this.cardFace = cardFace
         this.cardValue = cardValue
     }
+
+    get color() {
+        return this.cardSuit === '♣' || this.cardSuit === '♠' ? 'black' : 'red'
+    }
+
+    getHTML() {
+        const cardDiv = document.createElement('div')
+        cardDiv.innerText = this.cardSuit
+        cardDiv.classList.add('card', this.color)
+        cardDiv.dataset.value = `${this.cardFace} ${this.cardSuit}`
+        return cardDiv
+    }
     
 }
 
 class Deck {
     constructor() {
         this.cardDeck = []
-    }
-
-    get cardsNumber() {
-        return this.cardDeck.length
     }
 
     makeDeck() {
@@ -47,67 +55,81 @@ class Deck {
     }
 }
 
-/* let practiceDeck = new Deck()
-console.log(practiceDeck.makeDeck()) */
+//let practiceDeck = new Deck()
+//console.log(practiceDeck.makeDeck())
 
-// Class used for creating player objects; each player needs a name a pile of 26 cards
+// Class used for creating player objects; each player needs a name, a pile of 26 cards
 class Player {
     constructor() {
+        this.name = name
         this.cardPile = []
+        this.score = []
     }
 }
 
 // Class for creating each game
 class Battle {
-    constructor () {
+    constructor (player1, player2) {
         this.deck = new Deck()
-        this.player1 = new Player(player1)
-        this.player2 = new Player(player2)
-        this.p1Score = []
-        this.p2Score = []
+        this.player1 = new Player(player1, player1.cardPile, player1.score)
+        this.player2 = new Player(player2, player2.cardPile, player2.score)
+        this.dealCards()
     }
-
+ 
     dealCards() {
-        let p1Pile, p2Pile
-        
-        p1Pile = new Deck(deck.cardDeck.slice(0,26))
-        p2Pile = new Deck(deck.cardDeck.slice(26,52))
+        this.player1.cardPile = new Deck(cardDeck.slice(0,26))
+        let p1Pile = this.player1.cardPile
+        this.player2.cardPile = new Deck(cardDeck.slice(26,52))
+        let p2Pile = this.player2.cardPile
+
+        console.log(p1Pile)
+        console.log(p2Pile)
     }
 
-    /* showCardPiles() {
-        display card piles
-    } */
-    
-    playBattle() {
+    showCardPiles() {
+        let p1Deck = document.querySelector('.p1-deck')
+        let p2Deck = document.querySelector('.p2-deck')
         
-       while (p1Pile > 0 && p2Pile > 0) {
-            let p1Card = this.p1Pile.shift()
-            let p2Card = this.p2Pile.shift()
 
+        p1Deck.appendChild(p1Card.getHTML())
+        p2Deck.appendChild(p2Card.getHTML())
+
+    } 
+
+    playBattle() {   
+        let p1Card = p1Pile.flipCard()
+        let p2Card = p2Pile.flipCard()
+        let result = document.querySelector('.result')
+        
+        while (p1Pile > 0 && p2Pile > 0) {
             if (p1Card > p2Card) {
                 p1Score.push(1)
-                console.log('Player 1 wins the battle!')
+                result.innerText = 'Player 1 wins the battle!'
             } else if (p1Card < p2Card) {
                 p2Score.push(1)
-                console.log('Player 2 wins the battle!')
+                result.innerText = 'Player 2 wins the battle!'
             } else {
-                console.log('Tie! No points awarded.')
+                result.innerText = 'Tie! No points awarded.'
             }
         }
-    }
+     }
 
-    declareWinner () {
-        let p1TotalPoints = p1Pile.reduce((x, y) => x + y, 0)
-        let p2TotalPoints = p2Pile.reduce((x, y) => x + y, 0)
-
-        if (p1TotalPoints > p2TotalPoints) {
-            console.log('Player 1 wins the war!')
-        } else if (p1TotalPoints < p2TotalPoints) {
-            console.log('Player 2 wins the war!')
-        } else {
-            console.log('Tie! Neither player wins')
-        }
+     flipCard() {
+        return this.cards.shift()
     }
+    
+     declareWinner () {
+         let p1TotalPoints = p1Pile.reduce((x, y) => x + y, 0)
+         let p2TotalPoints = p2Pile.reduce((x, y) => x + y, 0)
+ 
+         if (p1TotalPoints > p2TotalPoints) {
+             result.innerText = 'Player 1 wins the war!'
+         } else if (p1TotalPoints < p2TotalPoints) {
+            result.innerText = 'Player 2 wins the war!'
+         } else {
+            result.innerText = 'Tie! Neither player wins'
+         }
+     }  
 }
 
 //let battle = new Battle()
