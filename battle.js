@@ -1,3 +1,4 @@
+// Class for creating a card object with a suit, face, and value
 class Card {
     constructor(cardSuit, cardFace, cardValue) {
         this.cardSuit = cardSuit
@@ -6,11 +7,13 @@ class Card {
     } 
 }
 
+// Class for creating a deck of cards - an array of 52 card objects - and shuffling it
 class Deck {
     constructor() {
         this.cardDeck = []
     }
 
+    // Method for creating deck of 52 cards
     makeCards () {  
         const cardSuits = ['♣', '♠', '♦', '♥']
         const cardFaces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -25,7 +28,7 @@ class Deck {
         }
     }
 
-
+// Credit for shuffleDeck method: https://www.youtube.com/@WebDevSimplified
     shuffleDeck() {
         for (let i = this.cardDeck.length - 1; i > 0; i--) {
             const newIndex = Math.floor(Math.random() * (i + 1))
@@ -36,26 +39,23 @@ class Deck {
     }
 }
 
-// Class used for creating player objects; each player needs a name, a pile of 26 cards
+// Class creating player objects, each with a name, a pile of cards, and a score
 class Player {
     constructor(name) {
         this.name = name
         this.cardPile = []
         this.score = []
     }
-
-    flipCard() {
-        return this.cardPile.shift()
-    }
 }
 
-// Class for creating each game
+// Class for creating each game of Battle
 class Battle {
     constructor (player1, player2) {
         this.player1 = new Player(player1)
         this.player2 = new Player(player2)
     }
  
+    // Method for dealing 26 cards to each player
     dealCards() {
         let deck = new Deck()
         deck.makeCards()
@@ -68,6 +68,7 @@ class Battle {
         console.log(this.player2.cardPile)
     }
 
+    // Method for playing the game - each player draws a card, cards are compared, and points are awarded dependent on the outcome
     playBattle() {          
          while (this.player1.cardPile.length > 0 && this.player2.cardPile.length > 0) {
             let p1Card = this.player1.cardPile.shift().cardValue
@@ -88,6 +89,7 @@ class Battle {
         }
      }
 
+     // Method that declares the winner of the War - the player who won the most battles
      declareWinner () {
          let p1TotalPoints = this.player1.score.reduce((x, y) => x + y, 0)
          let p2TotalPoints = this.player2.score.reduce((x, y) => x + y, 0)
@@ -102,6 +104,7 @@ class Battle {
      }  
 }
 
+// Invoking game methods
 let battle = new Battle()
 battle.dealCards()
 battle.playBattle()
